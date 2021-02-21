@@ -1,12 +1,26 @@
-:- use_module(library(clpfd)).
-dist(X, A1, B1, A2, B2):- X is round(sqrt((A1-A2)^2 + (B1-B2)^2)).
-withinRange(Range, X1, Y1, X2, Y2):- Range #>= X, dist(X, X1, Y1, X2, Y2).
-affected(X):-human(X), position(X, X1, Y1), withinRange(50,0,0, X1, Y1).
-bonus(X, V):- X is (V//10).
+/*Attack rules*/
 
+/* Combat Phase rules and facts */
+activeCharacter(ulric).
+activeCharacterDoneAction(false).
+activeCharacterDoneMove(false).
+/* Generat Game Facts */
+weapon(ulric, sword).
+ws(ulric, 60).
+skill(ulric, melee, 20).
+advantage(ulric, 0).
+armor(ulric, torso, 1).
+attackSkill(sword, melee).
 
-/* Facts */
-human(bla).
-human(blik).
-position(bla, 12, 14).
-position(blik, 200, 20).
+range(sword, 1).
+weaponSkill(sword, melee).
+weaponDamage(sword, 4).
+position(ulric, 12, 14).
+position(sigmar, 12, 19).
+/*
+Python: query state to see what is possible 
+then execute action, first query prolog to see the consequences and apply them
+prolog:
+what is possible
+impact of actions
+*/

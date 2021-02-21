@@ -18,11 +18,13 @@ attackRollThreshold(Threshold, Assiliant):-
 
 successfulAttack(Assiliant, Roll):-
     attackRollThreshold(Threshold, Assiliant),
-    Threshold #=< Roll.
+    Threshold #>= Roll.
 
-basicDamage(BasicDamage, Assiliant, Roll, Threshold):-
+basicDamage(BasicDamage, Assiliant, Roll):-
+    attackRollThreshold(Threshold, Assiliant),
     weapon(Assiliant, Weapon),
     weaponDamage(Weapon, WeaponDamage),
     sl(Roll, Threshold, SL),
-    stat(Assiliant, strength, SB),
-    BasicDamage is (WeaponDamage + bonus(SB) + SL).
+    stat(Assiliant, s, S),
+    bonus(SB, S),
+    BasicDamage is (WeaponDamage + SB + SL).
