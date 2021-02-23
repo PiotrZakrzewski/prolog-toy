@@ -2,6 +2,7 @@
 :-[facts, map, rolls].
 
 canAttack(Assiliant, Target):- 
+    \+(Assiliant == Target),
     weapon(Assiliant, AsWeapon),
     range(AsWeapon, Range),
     position(Assiliant, AsPosX, AsPosY),
